@@ -138,7 +138,7 @@ def my_menu_graph_construction(G,node_names_list,node_positions):
                     print(bcolors.WARNING + "\tERROR Invalid number of links to read from data set. It should be in {1,2,...,2102}. Try again..." + bcolors.ENDC)
                     print(bcolors.WARNING + "\t++++++++++++++++++++++++++++++++++++++++" + bcolors.ENDC)            
                 else:
-                    G,node_names_list = STUDENT_AM_read_graph_from_csv(NUM_LINKS)
+                    G,node_names_list = read_graph_from_csv(NUM_LINKS)
                     print(  "\tConstructing the FB-FOOD graph with n =",G.number_of_nodes(),
                             "vertices and m =",G.number_of_edges(),"edges (after removal of loops).")
 
@@ -287,11 +287,11 @@ def my_menu_community_detection(G,node_names_list,node_positions,hierarchy_of_co
                         print(bcolors.WARNING + "\t++++++++++++++++++++++++++++++++++++++++" + bcolors.ENDC)
 
                     else: 
-                        G = STUDENT_AM_add_random_edges_to_graph(G,node_names_list,NUM_RANDOM_EDGES,EDGE_ADDITION_PROBABILITY)
+                        G = add_random_edges_to_graph(G,node_names_list,NUM_RANDOM_EDGES,EDGE_ADDITION_PROBABILITY)
 
             elif my_option_list[0] == 'H':                  #2.2: ADD HAMILTON CYCLE
 
-                G = STUDENT_AM_add_hamilton_cycle_to_graph(G,node_names_list)
+                G = add_hamilton_cycle_to_graph(G,node_names_list)
 
             elif my_option_list[0] == 'P':                  # 2.3: PLOT G
                 print("Printing graph G with",G.number_of_nodes(),"vertices,",G.number_of_edges(),"edges and",nx.number_connected_components(G),"connected components." )
@@ -342,10 +342,10 @@ def my_menu_community_detection(G,node_names_list,node_positions,hierarchy_of_co
 
                     # CHECKING CORRECTNESS OF GIVWEN PARAMETERS
                     if alg_choice == 'N' and graph_layout in ['spring','circular','random','shell']:
-                        STUDENT_AM_use_nx_girvan_newman_for_communities(G,graph_layout,node_positions)
+                        use_nx_girvan_newman_for_communities(G,graph_layout,node_positions)
 
                     elif alg_choice == 'O'and graph_layout in ['spring','circular','random','shell']:
-                        STUDENT_AM_one_shot_girvan_newman_for_communities(G,graph_layout,node_positions)
+                        one_shot_girvan_newman_for_communities(G,graph_layout,node_positions)
 
                     else:
                         print(bcolors.WARNING + "\t++++++++++++++++++++++++++++++++++++++++" + bcolors.ENDC)
@@ -389,10 +389,10 @@ def my_menu_community_detection(G,node_names_list,node_positions,hierarchy_of_co
                         print(bcolors.WARNING + "\t++++++++++++++++++++++++++++++++++++++++" + bcolors.ENDC)
 
                     else:
-                        STUDENT_AM_divisive_community_detection(G,number_of_divisions,graph_layout,node_positions)
+                        divisive_community_detection(G,number_of_divisions,graph_layout,node_positions)
 
             elif my_option_list[0] == 'M':      # 2.6: DETERMINE PARTITION OF MIN-MODULARITY, FOR A GIVEN BINARY HIERARCHY OF COMMUNITY PARTITIONS
-                STUDENT_AM_determine_opt_community_structure(G,hierarchy_of_community_tuples)
+                determine_opt_community_structure(G,hierarchy_of_community_tuples)
 
 
             elif my_option_list[0] == 'V':      # 2.7: VISUALIZE COMMUNITIES WITHIN GRAPH
@@ -418,7 +418,7 @@ def my_menu_community_detection(G,node_names_list,node_positions,hierarchy_of_co
                         print(bcolors.WARNING + "\t++++++++++++++++++++++++++++++++++++++++" + bcolors.ENDC)
 
                     else:
-                        STUDENT_AM_visualize_communities(G,community_tuples,graph_layout,node_positions)
+                        visualize_communities(G,community_tuples,graph_layout,node_positions)
 
             elif my_option_list[0] == 'E':
                 quit()          #EXIT
@@ -635,7 +635,7 @@ def divisive_community_detection(G,number_of_divisions,graph_layout,node_positio
 ######################################################################################################################
 def determine_opt_community_structure(G,hierarchy_of_community_tuples):
 
-    print(bcolors.ENDC + "\tCalling routine " + bcolors.HEADER + "STUDENT_AM_determine_opt_community_structure(G,hierarchy_of_community_tuples)" + bcolors.ENDC +"\n")
+    print(bcolors.ENDC + "\tCalling routine " + bcolors.HEADER + "determine_opt_community_structure(G,hierarchy_of_community_tuples)" + bcolors.ENDC +"\n")
    
 ######################################################################################################################
 def add_hamilton_cycle_to_graph(G,node_names_list):
